@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User page</title>
+
+    <!-- Boxicons -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="use.css">
+    <style>
+
+            @media screen and (max-width: 768px) {
+            .password {
+                margin-top: 60px; 
+            }
+            .logo img {
+                max-width: 80px; 
+            }
+
+            
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <img src="icon/Black Modern Car Automotive Logo (1).png" alt="Vroom Logo">
+        </a>
+        <a href="index2.html">Home</a>
+        <a href="loggedIn_about.html">About Us</a>
+        <a href="loggedin_rent.html">Rent a Car</a>
+        <a href="loggedIn_contact.html">Contact us</a> 
+
+        <a href="use.html" class="user"><img src="icon/user.png" alt=""></a>
+        <a onclick="signOut()" class="sign-in-btn">Sign Out</a>
+    </nav>
+
+    <section id="sidebar">
+		<a href="#" class="brand">
+            <i class='bx bxs-user'></i>
+    		<span class="text" id="username"> User Pannel</span>
+		</a>
+		<ul class="side-menu top">
+
+			<li>
+                <a href="use.html">
+                    <i class='bx bxs-book'></i>
+                    <span class="text"> Current Booking</span>
+                </a>
+			</li>
+
+            <li>
+                <a href="use.html">
+                    <i class='bx bxs-book'></i>
+                    <span class="text">Recent Bookings</span>
+                </a>
+			</li>
+
+			<li>
+                    <a href="use.html">
+                        <i class='bx bxs-message-dots'></i>
+                        <span class="text">Loyalty</span>
+                    </a>
+                
+			</li>
+            <li>
+				<a href="#">
+					<i class='bx bxs-like' ></i>
+					<span class="text">Offer</span>
+				</a>
+			</li>
+            <li>
+				<a href="usersett.html">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+		</ul>
+    </section>
+
+    <div class="password">
+        <form id="passwordForm" action="">
+            <h2>Change Password</h2>
+            <input id="currentPassword" type="password" placeholder="Current Password" required>
+            <input id="newPassword" type="password" placeholder="New Password" required>
+            <button type="submit">Change Password</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const userName = localStorage.getItem('username');
+    
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
+                        var response = this.responseText;
+                        if (response.trim() === "success") {
+                            Toastify({
+                                text: "Password change successful",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "green",
+                                stopOnFocus: true
+                            }).showToast();
+                            setTimeout(() => {
+                                location.reload();
+                            }, 3000);
+                        } else {
+                            Toastify({
+                                text: "Password change failed",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "red",
+                                stopOnFocus: true
+                            }).showToast();
+                        }
+                    } else {
+                        alert("Error: " + this.status);
+                    }
+                }
+            };
+    
+            xhr.open("POST", "auth.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("passwordChange=true&currentPassword=" + encodeURIComponent(currentPassword) + "&newPassword=" + encodeURIComponent(newPassword) + "&username=" + userName);
+        });
+    </script>
+
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

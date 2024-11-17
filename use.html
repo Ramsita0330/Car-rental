@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="use.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+
+
+	<title>User Page</title>
+    <style>
+ 
+
+    </style>
+</head>
+<body>
+    <header>
+    <nav>
+        <a href="#" class="logo">
+            <img src="icon/Black Modern Car Automotive Logo (1).png" alt="Vroom Logo">
+        </a>
+        <a href="index2.html">Home</a>
+        <a href="loggedIn_about.html">About Us</a>
+        <a href="loggedin_rent.html">Rent a Car</a>
+        <a href="loggedIn_contact.html">Contact us</a> 
+
+        <a href="use.html" class="user"><img src="icon/user.png" alt=""></a>
+        <a onclick="signOut()" class="sign-in-btn">Sign Out</a>
+
+    </nav>
+</header>
+
+    
+
+
+	<section id="sidebar">
+		<a href="#" class="brand">
+            <i class='bx bxs-user' id="profile-btn"></i>
+    		<span class="text" id="username">User Panel</span>
+		</a>
+		<ul class="side-menu top">
+
+			<li>
+                <a href="#Bookings">
+                    <i class='bx bxs-book'></i>
+                    <span class="text"> Current Booking</span>
+                </a>
+			</li>
+
+            <li>
+                <a href="#Bookings">
+                    <i class='bx bxs-book'></i>
+                    <span class="text">Recent Bookings</span>
+                </a>
+			</li>
+
+			<li>
+                    <a href="#loyalty-panel">
+                        <i class='bx bxs-message-dots'></i>
+                        <span class="text">Loyalty</span>
+                    </a>
+                
+			</li>
+            <li>
+				<a href="#">
+					<i class='bx bxs-like' ></i>
+					<span class="text">Offer</span>
+				</a>
+			</li>
+            <li>
+				<a href="usersett.html">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+		</ul>
+
+	</section>
+	<section id="content">
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <p id="confirmationMessage"> Are you sure you want to cancel this order?</p>
+                <button id="confirmCancelBtn">Yes</button>
+                <button id="cancelCancelBtn">No</button>
+            </div>
+        </div>
+
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+				</div>
+
+			</div>
+            
+            <div class="table-data" id="Bookings">
+				<div class="order">
+					<div class="head">
+						<h3>Current Order</h3>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Phone Number</th>
+								<th>Date Order Pickup</th>
+                                <th>Date Order Drop</th>
+								<th>Car Selected</th>
+                                <th>Fuel Type</th>
+                                <th>Brand Selected</th>
+                                <th>Message</th>
+                                <th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="user-current-orders">
+						</tbody>
+					</table>
+                </div>
+
+			<div class="table-data" id="Bookings">
+				<div class="order">
+					<div class="head">
+						<h3>Previous Orders</h3>
+				
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>Phone Number</th>
+								<th>Date Order Pickup</th>
+                                <th>Date Order Drop</th>
+								<th>Car Selected</th>
+                                <th>Fuel Type</th>
+                                <th>Brand Selected</th>
+                                <th>Message</th>
+                                <th>Action</th>
+							</tr>
+						</thead>
+						<tbody id="user-previous-orders">
+						</tbody>
+					</table>
+				</div>
+                
+                    <!-- loyalty Panel -->
+<div class="loyalty-panel" id="loyalty-panel">
+    <div class="head">
+        <h3>Loyalty points</h3>
+
+        <p>Your Total Loyalty Points is<span> 7.0 </span></p>
+
+    </div>
+    <table class="loyalty-table">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Date</th>
+                <th>Car</th>
+                <th>Brand</th>
+                <th>Loyalty points gained</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>01-03-2023</td>
+                <td>SUV </td>
+                <td>Kia</td>
+                <td>7.0</td>
+            </tr>
+        </tbody>
+    </table>
+   
+</div>
+		</main>	
+
+
+</section>
+
+	
+    
+<script>
+    document.getElementById('confirmationModal').style.display = 'none';
+</script>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script src="login.js"></script>
+</body>
+</html>

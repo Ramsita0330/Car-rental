@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In</title>
+    <link rel="stylesheet" href="log.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="icon/Black Modern Car Automotive Logo (1).png" alt="Vroom Logo">
+            </a>
+        </nav>
+    </header>
+    <div class="container">
+        <div id="loginForm" class="log-in-form">
+            <h2>Log In</h2>
+            <input id="loginUsername" type="text" placeholder="Username" required>
+            <input id="loginPassword" type="password" placeholder="Password" required>
+            <p id = "errorMessage">**Enter valid credentials**</p>
+            <button type="submit" onclick="login()">Log In</button>
+            <!-- <p class="forgot-password"><a href="forgot.html">Forgot Password?</a></p> -->
+            <p class="sign-in"><a href="Sign.html">Don't have an account? Sign up!</a></p>
+        </div>
+        <!-- Popup box to show login messages-->
+        <div id="successPopup" class="popup-box">
+            <p id="popupMessage"></p>
+            <img class="loading" src="icon/loading.gif" alt="loading Icon"> 
+        </div>
+    </div>
+    <script> document.getElementById("errorMessage").style.display = "none"; </script>
+    <script>
+        // Function to handle pressing Enter key
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                const username = document.getElementById("loginUsername").value.trim();
+                const password = document.getElementById("loginPassword").value.trim();
+                
+                if (!username || !password) {
+                    // Both fields are empty, switch focus
+                    event.preventDefault();
+                    if (event.target === document.getElementById("loginUsername")) {
+                        document.getElementById("loginPassword").focus();
+                    } else {
+                        document.getElementById("loginUsername").focus();
+                    }
+                } else if(username && password) {
+                    // At least one field is filled, trigger login function
+                    login();
+                }
+            }
+        }
+
+        // Add event listener for Enter key press on input fields
+        document.getElementById("loginUsername").addEventListener("keypress", handleKeyPress);
+        document.getElementById("loginPassword").addEventListener("keypress", handleKeyPress);
+    </script>
+    
+    <script src="script.js"> </script>
+    <script src="login.js"></script>
+</body>
+</html>

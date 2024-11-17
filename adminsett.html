@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="admintask.css">
+	<style>
+		
+	</style>
+	
+
+
+
+	<title>AdminHub</title>
+</head>
+<body>
+
+
+	<section id="sidebar">
+		<a href="#" class="brand">
+            <i class='bx bxs-user'></i>
+    		<span id="username" class="text">Admin Pannel</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="admintask.html">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+                <a href="admintask.html#scars">
+                    <i class='bx bxs-car'></i>
+                    <span class="text">Car Collection</span>
+                </a>
+			</li>
+			<li>
+				<a href="admintask.html#sdrivers">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Available Drivers</span>
+				</a>
+			</li>
+			<li>
+                    <a href="admintask.html">
+                        <i class='bx bxs-message-dots'></i>
+                        <span class="text">Message</span>
+                    </a>
+                
+			</li>
+            <li>
+                <a href="admintask.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="text">Users</span>
+                </a>
+            
+        </li>
+
+            <li>
+				<a href="adminsett.html">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a onclick="signOut()" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+
+	</section>
+<div class="password">
+    <form id="passwordForm" action="">
+        <h2>Change Password</h2>
+        <input id="currentPassword" type="password" placeholder="Current Password" required>
+        <input id="newPassword" type="password" placeholder="New Password" required>
+        <button type="submit">Change Password</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('passwordForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+		const userName = localStorage.getItem('username');
+
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4) {
+				if (this.status == 200) {
+					var response = this.responseText;
+					if (response.trim() === "success") {
+						Toastify({
+							text: "Password change successful",
+							duration: 3000,
+							gravity: "top",
+							position: "right",
+							backgroundColor: "green",
+							stopOnFocus: true
+						}).showToast();
+						setTimeout(() => {
+							location.reload();
+						}, 3000);
+					} else {
+						Toastify({
+                                text: "Password change failed",
+                                duration: 3000,
+                                gravity: "top",
+                                position: "right",
+                                backgroundColor: "red",
+                                stopOnFocus: true
+                            }).showToast();
+					}
+				} else {
+					alert("Error: " + this.status);
+				}
+			}
+		};
+
+		xhr.open("POST", "auth.php", true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.send("passwordChange=true&currentPassword=" + encodeURIComponent(currentPassword) + "&newPassword=" + encodeURIComponent(newPassword) + "&username=" + userName);
+    });
+</script>
+<script src="login.js"></script>
+</body>
+</html>

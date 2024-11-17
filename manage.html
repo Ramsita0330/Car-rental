@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VROOM Car Rental Services Admin Panel</title>
+    <link rel="stylesheet" href="manage.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <header>
+        <h1>Managing Cars</h1>
+    </header>
+    
+    <main>
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <p>Are you sure you want to delete this car?</p>
+                <button id="confirmDeleteBtn">Yes</button>
+                <button id="cancelDeleteBtn">No</button>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <a href="admintask.html">
+                <button class="gobackBtn">Go Back to Dashboard</button>
+            </a>
+            <button class="addcarBtn" id="addCarButton">+ Add Car</button>
+        </div>
+
+        <table id="carTable">
+            <thead>
+                <tr>
+                    <th>Car ID</th>
+                    <th>Car Name</th>
+                    <th>Car Brand</th>
+                    <th>Car Type</th>
+                    <th>Prie Per Hour (pph)</th>
+                    <th>Vehicle Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cars-table-body">
+                <!-- cars -->
+            </tbody>
+        </table>
+    </main>
+    
+
+    <div id="carEditPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <h2 id="popupHeading">Add Cars</h2>
+            <div class="car-form" id="carForm">
+                <form action="" id="carDetailsForm">
+                    <div class="form-group">
+                        <span class="custom-file-label">Upload Image:</span>
+                        <input type="file" class="custom-file-input" id="image" name="image" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carName">Car Name:</label>
+                        <input type="text" id="carName" name="carName" placeholder="Car name, e.g. Rav4" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carBrand">Car Brand:</label>
+                        <input type="text" id="carBrand" name="carBrand" placeholder="Brand of the car, e.g. Toyota"required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carType">Car Type:</label>
+                        <input type="text" id="carType" name="carType" placeholder="Type of the car, e.g. Petrol" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pph">Prie Per Hour (pph)</label>
+                        <input type="text" id="pph" name="pph" placeholder="Hourly rental rate, e.g. 999.99" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleNumber">Vehicle Number:</label>
+                        <input type="text" id="vehicleNumber" name="vehicleNumber" placeholder="Registration Number, e.g. B AC 9999" required>
+                    <button type="submit" id="saveCarBtn" onclick="saveButton()">Save Car</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+    <script>
+        document.getElementById('confirmationModal').style.display = 'none';
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = document.getElementById("carEditPopup");
+            const span = document.querySelector(".close-btn");
+            const addCarBtn = document.getElementById("addCarButton");
+            const editCarBtns = document.querySelectorAll(".editButton");
+            const popupHeading = document.getElementById("popupHeading");
+            const carDetailsForm = document.getElementById("carDetailsForm");
+            const carNameInput = document.getElementById("carName");
+
+            function openModal(heading, action) {
+                popupHeading.textContent = heading;
+                carNameInput.disabled = action === 'Edit';
+
+                modal.style.display = "block";
+            }
+
+            addCarBtn.addEventListener("click", function() {
+                openModal("Add Car", 'Add');
+            });
+
+            editCarBtns.forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    openModal("Edit Car", 'Edit');
+                });
+            });
+
+            span.addEventListener("click", function() {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+
+            carDetailsForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                modal.style.display = "none";
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+</html>
